@@ -10,21 +10,22 @@ export default function MainPath(props){
     <div className='viewcontainer'>
       <nav className='navbar'>
         <h3 className='listtitle'>Folders</h3>
-        {props.folders.map(folder=> {
+        {props.folders.map((folder,i)=> {
           return (
-            <NavLink to={`/folder/${folder.id}`}><button className='folderbutton'>{`${folder.name}`}</button></NavLink>
+            <NavLink key={`folderlink${i}`} to={`/folder/${folder.id}`}><button className='folderbutton'>{`${folder.name}`}</button></NavLink>
           )
         })}
         <button type='button' className='addfolder'>+Add Folder</button>
       </nav>
       <main className='viewport'>
-        {props.notes.map(note=>{
+        {props.notes.map((note,i)=>{
           return (
             <NoteDisplay 
               note={note}
               toNote={props.toNote}
               toMain={props.toMain}
               setNote={props.setNote}
+              key={`Note${i}`}
             />
           )
         })}
