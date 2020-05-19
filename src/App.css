@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+}
+
+header {
+  position:fixed;
+  top:0;
+  margin:0;
+  display:flex;
+  justify-content: center;
+  width:100vw;
+  height:15vh;
+  border:1px dotted black;
+}
+
+.viewport {
+  position:fixed;
+  left:20vw;
+  top:15vh;
+  overflow: scroll;
+  width:80vw;
+  height:calc(85vh + 15px);
+  padding:10px;
+}
+
+.active button {
+  background-color: aqua;
+  border:1px solid black;
+  font-weight:800;
+}
+
+.newnotebutton {
+  margin: 15px;
+  width:20vw;
+  height:10vh;
+  font-size: 20px;
+}
+
+.notecontent {
+  width:calc(80vw - 35px);
+  padding: 15px;
+}
+
+.goback {
+  width:15vw;
+  height:7.5vh;
+  font-size: 16px;
+}

@@ -1,0 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
+.title {
+  text-decoration: underline;
+  font-family: sans-serif;
+}

@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  position:fixed;
+  left:0;
+  height:85vh;
+  width:20vw;
+  padding:2.5vw;
+  margin:0;
+  top:15vh;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  border:1px dotted black;
+}
+
+.listtitle {
+  text-align: left;
+  margin:0;
+  margin-bottom:1vh;
+  width:15vw;
+  text-decoration: underline;
+}
+
+.folderbutton {
+  width:15vw;
+  height:5vh;
+}
+
+.addfolder {
+  margin-top:2.5vh;
+  width:12.5vw;
+}

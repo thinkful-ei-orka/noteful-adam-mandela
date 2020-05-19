@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+.notelisting {
+  margin:0;
+  width: calc(80vw - 35px);
+  border: 1px dotted gray;
+  padding:5px;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  background-color: darkgray;
+  border:1px solid black;
+}
+
+.notetitle {
+  margin:0;
+  margin-top:7.5px;
+  background-color:lightgray;
+  padding-left:10px;
+  border:1px solid gray;
+}
+
+.notelistingcontents {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deletebutton {
+  height:30px;
+  margin-right:20px;
+}
+
