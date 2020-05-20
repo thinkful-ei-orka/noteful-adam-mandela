@@ -23,14 +23,12 @@ export default class MainPath extends React.Component {
             <button type='button' className='addfolder'>+Add Folder</button>
           </nav>
           <main className='viewport'>
-            {notes.map((note,i)=>{
+            {notes.map((note)=>{
               return (
                 <NoteDisplay 
+                  history={this.props.history}
                   note={note}
-                  toNote={this.props.toNote}
-                  toMain={this.props.toMain}
-                  setNote={this.props.setNote}
-                  key={`Note${i}`}
+                  key={`${note.name}`}
                 />
               )
             })}

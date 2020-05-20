@@ -2,16 +2,17 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import MainPath from './MainPath';
 import Header from './Header';
-//import NavBar from './NavBar';
 import FolderPath from './FolderPath'
 import NotePath from './NotePath';
 import './App.css';
 import ApiContext from './ApiContext';
+import {withRouter} from 'react-router';
 
 class App extends React.Component {
   state = {
     notes:[],
-    folders:[]
+    folders:[],
+    noteid:''
   }
 
   componentDidMount(){
@@ -24,11 +25,17 @@ class App extends React.Component {
     .catch(error=>console.log({error}))
   }
 
- 
+  deleteNoteHandle = (noteid,path,customHistory)=>{
+    fetch(`http://localhost:9090/notes/${noteid}`,{method:'DELETE', headers: {'content-type':'application/json'}})
+    .then(()=>{this.setState({notes:this.state.notes.filter(note=>note.id!==noteid)})})
+    .catch(error=>console.log(error))
+  }
+
   render(){
     const statevalues ={
       notes:this.state.notes,
-      folders:this.state.folders
+      folders:this.state.folders,
+      deleteNote:this.deleteNoteHandle
     }
 
     return (
@@ -48,8 +55,7 @@ class App extends React.Component {
             render={({history})=>
               <NotePath
                 history={history}
-                folders={this.state.folders}
-                //note={this.state.notes.find(note=>note.id===history.location.pathname.split('/').reverse()[0])}
+                noteid={this.state.noteid}
               />
             }
           />
@@ -67,4 +73,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -6,6 +6,7 @@ import ApiContext from './ApiContext';
 
 export default class NotePath extends React.Component{
   render(){
+    console.log(this.props.noteid)
     return (
       <ApiContext.Consumer>
         {({notes=[], folders=[]})=>(
@@ -16,6 +17,8 @@ export default class NotePath extends React.Component{
             </nav>
             <main className='viewport'>
               <NoteDisplay
+                history={this.props.history}
+                key={notes.find(note=>note.id===this.props.history.location.pathname.split('/').reverse()[0]).name}
                 note={notes.find(note=>note.id===this.props.history.location.pathname.split('/').reverse()[0])}
               />
               <p className='notecontent'>

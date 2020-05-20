@@ -2,19 +2,28 @@
 //Name, date modified, delete button
 import React from 'react';
 import {Link} from 'react-router-dom';
+import ApiContext from './ApiContext';
+//import {Route, Redirect} from 'react-router-dom';
 import './NavBar.css';
 import './NoteDisplay.css';
 
-export default function NoteDisplay(props){
-  return (
-      <section className='notelisting'>
-        <Link to={`/note/${props.note.id}`}><h2 className='notetitle'>{props.note.name}</h2></Link>
-        <section className='notelistingcontents'>
-          <p>
-            Date modified: {new Date(props.note.modified).toDateString()}
-          </p>
-          <button type='button' className='deletebutton'>Delete Note</button>
+export default class NoteDisplay extends React.Component{
+  noteid=this.props.note.id
+  render(){
+    return (
+      <ApiContext.Consumer>
+        {({deleteNote=[]})=>(
+        <section className='notelisting'>
+          <Link to={`/note/${this.props.note.id}`}><h2 className='notetitle'>{this.props.note.name}</h2></Link>
+          <section className='notelistingcontents'>
+            <p>
+              Date modified: {new Date(this.props.note.modified).toDateString()}
+            </p>
+            <Link to={this.props.history.location.pathname.includes('note')?'/':this.props.history.location.pathname}><button type='button' className='deletebutton' id={this.noteid} onClick={((e)=>deleteNote(this.noteid,this.props.history.location.pathname,this.props.history))}>Delete Note</button></Link>
+          </section>
         </section>
-      </section>
-  )
+        )}
+      </ApiContext.Consumer>
+    )
+  }
 }

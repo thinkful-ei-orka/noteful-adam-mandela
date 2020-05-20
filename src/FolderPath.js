@@ -28,14 +28,12 @@ export default class FolderPath extends React.Component{
               <button type='button' className='addfolder'>+Add Folder</button>
             </nav>
             <main className='viewport'>
-              {notes.filter(note=>note.folderId===this.props.history.location.pathname.split('/').reverse()[0]).map((note,i)=>{
+              {notes.filter(note=>note.folderId===this.props.history.location.pathname.split('/').reverse()[0]).map((note)=>{
                 return (
                   <NoteDisplay 
-                    key={`note${i}`}
+                    history={this.props.history}
+                    key={`${note.name}`}
                     note={note}
-                    toNote={this.props.toNote}
-                    toMain={this.props.toMain}
-                    setNote={this.props.setNote}
                   />
                 )
               })}
