@@ -6,49 +6,63 @@ import Header from './Header';
 import FolderPath from './FolderPath'
 import NotePath from './NotePath';
 import './App.css';
+import ApiContext from './ApiContext';
 
 class App extends React.Component {
-  constructor(props){
-    super(props)
-    this.state=props.state
-    this.state.note=this.state.notes[0]
+  state = {
+    notes:[],
+    folders:[]
   }
 
+  componentDidMount(){
+    Promise.all([
+      fetch('http://localhost:9090/folders'),
+      fetch('http://localhost:9090/notes')
+    ])
+    .then(([res1,res2])=>Promise.all([res1.json(),res2.json()]))
+    .then(([folders,notes])=>{this.setState({folders,notes})})
+    .catch(error=>console.log({error}))
+  }
+
+ 
   render(){
+    const statevalues ={
+      notes:this.state.notes,
+      folders:this.state.folders
+    }
+
     return (
-      <main className='App'>
-        <Route path='/' component={Header} />
-        <Route 
-          exact path='/' 
-          render={({history})=>
-            <MainPath
-              history={history} 
-              folders={this.state.folders}
-              notes={this.state.notes}
-            />
-          } 
-        />
-        <Route
-          path='/note/'
-          render={({history})=>
-            <NotePath
-              history={history}
-              folders={this.state.folders}
-              note={this.state.notes.find(note=>note.id===history.location.pathname.split('/').reverse()[0])}
-            />
-          }
-        />
-        <Route
-          path='/folder/'
-          render={(history)=>
-            <FolderPath
-              history={history}
-              folders={this.state.folders}
-              notes={this.state.notes.filter(note=>note.folderId===history.location.pathname.split('/').reverse()[0])}
-            />
-          }
-        />
-      </main>
+      <ApiContext.Provider value={statevalues}>
+        <main className='App'>
+          <Route path='/' component={Header} />
+          <Route 
+            exact path='/' 
+            render={({history})=>
+              <MainPath
+                history={history} 
+              />
+            } 
+          />
+          <Route
+            path='/note/'
+            render={({history})=>
+              <NotePath
+                history={history}
+                folders={this.state.folders}
+                //note={this.state.notes.find(note=>note.id===history.location.pathname.split('/').reverse()[0])}
+              />
+            }
+          />
+          <Route
+            path='/folder/'
+            render={(history)=>
+              <FolderPath
+                history={history}
+              />
+            }
+          />
+        </main>
+      </ApiContext.Provider>
     );
   }
 }
