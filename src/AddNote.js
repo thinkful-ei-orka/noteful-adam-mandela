@@ -12,6 +12,17 @@ export default class AddNote extends React.Component {
       :undefined
     :undefined
 
+  validateContents=()=>
+    this.props.note.touched?
+      this.props.note.content===''?
+        'Note content cannot be blank'
+      :undefined
+    :undefined
+
+  validateAll=()=>{
+    if(this.validateForm()){return(this.validateForm())}
+    else if(this.validateContents()){return(this.validateContents())}
+  }
   render(){
     return (
       <ApiContext.Consumer>
@@ -22,7 +33,7 @@ export default class AddNote extends React.Component {
             </nav>
             <main className='viewport'>
               <form className='noteform' onSubmit={((e)=>{e.preventDefault();addNoteSubmit(this.props.note.content,this.props.note.folderId,this.props.note.name)})}>
-                {this.validateForm()!==undefined?<p className='formerror'>{this.validateForm()}</p>:null}
+                {this.validateAll()!==undefined?<p className='formerror'>{this.validateAll()}</p>:null}
                 <section className='fields start'>
                   <label htmlFor='newnote'>
                   Enter New Note Name:
