@@ -3,14 +3,12 @@
 //uses NoteDisplay**
 //add note button -> new note (dummy)
 
-/*
-
-*/
 import React from 'react';
 import NoteDisplay from './NoteDisplay';
-import {NavLink} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import ApiContext from './ApiContext';
 import './NavBar.css';
+import PropTypes from 'prop-types';
 
 export default class FolderPath extends React.Component{
   render(){
@@ -25,7 +23,7 @@ export default class FolderPath extends React.Component{
                   <NavLink key={`folderlink${i}`} to={`/folder/${folder.id}`} activeClassName='active'><button className='folderbutton'>{`${folder.name}`}</button></NavLink>
                 )
               })}
-              <button type='button' className='addfolder'>+Add Folder</button>
+              <Link to='/newfolder/'><button type='button' className='addfolder'>+Add Folder</button></Link>
             </nav>
             <main className='viewport'>
               {notes.filter(note=>note.folderId===this.props.history.location.pathname.split('/').reverse()[0]).map((note)=>{
@@ -37,10 +35,14 @@ export default class FolderPath extends React.Component{
                   />
                 )
               })}
-              <button type='button' className='newnotebutton'>+Add Note</button>
+              <Link to='/newnote'><button type='button' className='newnotebutton'>+Add Note</button></Link>
             </main>
           </div>
         )}
       </ApiContext.Consumer>          
   )}
+}
+
+FolderPath.propTypes={
+  history:PropTypes.object.isRequired
 }

@@ -4,6 +4,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import ApiContext from './ApiContext';
 //import {Route, Redirect} from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './NavBar.css';
 import './NoteDisplay.css';
 
@@ -26,4 +27,9 @@ export default class NoteDisplay extends React.Component{
       </ApiContext.Consumer>
     )
   }
+}
+
+NoteDisplay.propTypes={
+  history:PropTypes.object.isRequired,
+  note:PropTypes.object.isRequired
 }

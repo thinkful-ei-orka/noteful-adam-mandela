@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+}
+
+.noteform {
+  height:65vh;
+  width:calc(80vw - 40px);
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items:flex-start;
+  background-color:darkgrey;
+  padding:10px;
+}
+
+.start {
+  margin-top:10vh;
+}
+
+.formerror {
+  height:20px;
+  width:auto;
+  color:darkred;
+  background-color: lightcoral;
+  border:1px solid black;
+  padding:30px;
+  font-weight: 400;
+  font-size: 17px;
+  display:flex;
+  align-items: center;
+  margin:0;
+  margin-left:calc(25vw);
+}
+
+.fields {
+  position:relative;
+  top:40px;
+  display:flex;
+  justify-content: center;
+  width:calc(80vw - 60px);
+  margin-bottom:15px;
+}
+
+.sourcefolder{
+  display:flex;
+  flex-direction:row;
+  justify-content: flex-start;
+}
+
+label {
+  font-size: 18px;
+  font-weight:600;
+  margin-right: 10px;
+  width:fit-content;
+  padding-left:5px;
+}
+
+input {
+  flex-grow:6;
+  margin-right: 5px;
+}
+
+.content {
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.content *{
+  width:calc(80vw - 60px);
+}
+
+.content textarea {
+  height:20vh;
+  padding:10px;
+  overflow:auto;
+}
+
+.fields button {
+  flex-grow: unset;
+  width:15vw;
+  height:5vh;
+  font-size:18px;
+  font-weight:600;
+}

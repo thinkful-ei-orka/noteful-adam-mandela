@@ -2,8 +2,9 @@
 // dummy add note button
 import React from 'react';
 import NoteDisplay from './NoteDisplay';
-import {NavLink} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import ApiContext from './ApiContext';
+import PropTypes from 'prop-types';
 import './NavBar.css';
 
 export default class MainPath extends React.Component {
@@ -20,7 +21,7 @@ export default class MainPath extends React.Component {
                 <NavLink key={`folderlink${i}`} to={`/folder/${folder.id}`}><button className='folderbutton'>{`${folder.name}`}</button></NavLink>
               )
             })}
-            <button type='button' className='addfolder'>+Add Folder</button>
+            <Link to='/newfolder/'><button type='button' className='addfolder'>+Add Folder</button></Link>
           </nav>
           <main className='viewport'>
             {notes.map((note)=>{
@@ -32,10 +33,15 @@ export default class MainPath extends React.Component {
                 />
               )
             })}
-            <button type='button' className='newnotebutton'>+Add Note</button>
+            <Link to='/newnote'><button type='button' className='newnotebutton'>+Add Note</button></Link>
           </main>
         </div>
         )}
     </ApiContext.Consumer>
-  )
-}}
+    )
+  } 
+}
+
+MainPath.propTypes={
+  history:PropTypes.object.isRequired
+}
